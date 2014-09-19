@@ -152,6 +152,9 @@ function init() {
         paintSaturation: 1,
         paintColorDecay: 1,
 
+        randomizeColor: false,
+        setPaintColor: { h: 250, s: 0.9, v: 0.3 },
+
         cellStates: 1
     };
 
@@ -186,11 +189,19 @@ function init() {
 
         //left click
         if (e.which === 1){
-            params.paintColor = {
-                h: Math.random(),
-                s: params.paintSaturation,
-                v: 1
-            };
+            if (params.randomizeColor) {
+                params.paintColor = {
+                    h: Math.random(),
+                    s: params.paintSaturation,
+                    v: 1
+                };
+            } else {
+                params.paintColor = {
+                    h: params.setPaintColor.h / 360.0,
+                    s: params.setPaintColor.s,
+                    v: 1
+                };
+            }
 
             if (params.pauseOnDraw) {
                 params.pauseCells = true;
@@ -533,6 +544,10 @@ function initGui() {
     var iPreset = gui.add(cont, 'activePreset');
     var iAnimate = gui.add(cont, 'togglePause').name('Pause').onChange(onPauseToggle);
     gui.add(params, 'pauseOnDraw').name('Pause On Draw');
+    
+    gui.add(params, 'randomizeColor').name('Randomize Color');
+    gui.addColor(params, 'setPaintColor').name("Color");
+
     gui.add(cont, 'updateTargets').name('Clear Screen');
 
     //Max added
