@@ -152,7 +152,7 @@ function init() {
         paintSaturation: 1,
         paintColorDecay: 1,
 
-        randomizeColor: false,
+        randomizeColor: true,
         setPaintColor: { h: 250, s: 0.9, v: 0.3 },
 
         cellStates: 1
@@ -327,7 +327,7 @@ function animate() {
         cellProgram.draw();
     }
     screenProgram.draw();
-    statsUi.update();
+    //statsUi.update();
     window.requestAnimationFrame(animate);
 }
 
@@ -519,12 +519,12 @@ function Controller() {
 }
 
 function initGui() {
-
+    /*
     statsUi = new Stats();
     statsUi.domElement.style.position = 'absolute';
     statsUi.domElement.style.left = '0px';
     statsUi.domElement.style.top = '0px';
-    document.body.appendChild(statsUi.domElement);
+    document.body.appendChild(statsUi.domElement);*/
 
     var gui = new dat.GUI(),
         presets = new RulePresets(),
